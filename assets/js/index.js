@@ -191,19 +191,31 @@ function aceInit() {
         return
     }
     $.getScript('../assets/ace-min-1.2.6/ace.js').done(function () {
-        console.log('Ace.js 加载完成')
-        var highlight = ace.require("ace/ext/static_highlight")
-        var dom = ace.require("ace/lib/dom")
-        $('pre').map(function (index, el) {
-            highlight(el, {
-                mode: el.getAttribute("ace-mode") || el.className.split('-').pop(),
-                theme: el.getAttribute("ace-theme") || 'chrome',
-                startLineNumber: 1,
-                showGutter: el.getAttribute("ace-gutter") || true,
-                trim: true
+        $.getScript('../assets/ace-min-1.2.6/ext-static_highlight.js').done(function () {
+            console.log('Ace.js 加载完成')
+            ace.config.set('basePath', '../assets/ace-min-1.2.6/');
+            var highlight = ace.require("ace/ext/static_highlight")
+            var dom = ace.require("ace/lib/dom")
+            $('code').map(function (index, el) {
+                var p = el.className.split('-')
+                $(el).attr({
+                    'ace-mode': 'ace/mode/' + (p[1] || "txt"),
+                    'ace-theme': 'ace/theme/' + (p[2] || "chrome"),
+                    'gutter': p[3] || true
+                })
+                highlight(el, {
+                    mode: el.getAttribute("ace-mode"),
+                    theme: el.getAttribute("ace-theme"),
+                    startLineNumber: 1,
+                    trim: true,
+                    showGutter: el.getAttribute("gutter")
+                })
             })
+        }).fail(function () {
+            console.log('Ace.js 未加载 -> static_highlight.js 文件不存在')
         })
     }).fail(function () {
         console.log('Ace.js 未加载 -> ace.js 文件不存在')
     })
+
 }
