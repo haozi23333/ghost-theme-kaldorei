@@ -167,7 +167,7 @@ function aceInit() {
             ace.config.set('basePath', '../assets/ace-min-1.2.6/');
             var highlight = ace.require("ace/ext/static_highlight")
             var dom = ace.require("ace/lib/dom")
-            $('code').map(function (index, el) {
+            $('pre code').map(function (index, el) {
                 var p = el.className.split('-')
                 $(el).attr({
                     'ace-mode': 'ace/mode/' + (p[1] || "plain_text"),
