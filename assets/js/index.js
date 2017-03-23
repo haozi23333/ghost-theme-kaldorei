@@ -131,7 +131,7 @@
 
     aceInit()
 
-    $(".post-content img").ImageZoom({
+    $(".post-content").ImageZoom({
 
     })
 })(jQuery);

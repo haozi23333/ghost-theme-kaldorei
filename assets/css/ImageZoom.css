@@ -36,6 +36,7 @@
     top: calc(50% - 100px);
     left: calc(50% - 100px);
     position: fixed;
+    z-index: 999999;
 }
 .ImageZoom-image-box{
     background: transparent;
@@ -53,7 +54,12 @@
 }
 
 
-
+.animated{
+    -webkit-animation-duration:.4s;
+    animation-duration:.4s;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both
+}
 
 
 

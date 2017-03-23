@@ -12,7 +12,7 @@
                      * 停止冒泡
                      */
                     event.stopPropagation()
-                    modelWindow.show($(this).attr('data-img') || 'https://haozi.moe/content/images/2016/11/ph.png')
+                    modelWindow.show($(this).attr('src') || 'https://haozi.moe/content/images/2016/11/ph.png')
 
                 })
             })(index)
@@ -29,10 +29,7 @@
         var image = new Image(src)
         image.src = src
         image.onload = function () {
-            $(image).css({
-                width: image.naturalWidth,
-                height: image.naturalHeight
-            })
+            $(image).removeAttr('width')
             callback(image)
         }
     }
@@ -42,31 +39,36 @@
             $('body').append('<div class="animated ImageZoom-loading"><div id="cssload-pgloading"><div class="cssload-loadingwrap"><ul class="cssload-bokeh"> <li></li><li></li> <li></li><li></li></ul></div></div></div>')
             $('body').append('<div class="animated ImageZoom-image"><div class="ImageZoom-image-box"></div></div>')
             $('.ImageZoom-cover').on('click', function () {
-                this.exit()
+                modelWindow.exit()
             })
         },
         show: function (src) {
             /**
              * 加载模态窗体
              */
-            $('.ImageZoom-cover').addClass('rotateIn').css('display','block')
-            $('.ImageZoom-loading').addClass('zoomIn').css('display','block')
+            $('.ImageZoom-cover').addClass('rotateIn').removeClass('rotateOut').css('display','block')
+            $('.ImageZoom-loading').addClass('zoomIn').removeClass('zoomOut').css('display','block')
+            $('.ImageZoom-image-box img').remove()
             loadImage(src, function (imageElement) {
-                $('.ImageZoom-loading').addClass('zoomOut').css('display','none')
-                $('.ImageZoom-image').append(imageElement)
+                $('.ImageZoom-image').addClass('zoomIn').removeClass('zoomOut').css('display','block')
+                $('.ImageZoom-loading').addClass('zoomOut').removeClass('zoomIn').css('display','none')
+                $(imageElement).appendTo($('.ImageZoom-image-box'))
             })
         },
 
         hide: function () {
-            $('.ImageZoom-cover').addClass('rotateOut').css('display','none')
+            $('.ImageZoom-cover').addClass('rotateOut').removeClass('rotateIn').css('display','none')
 
         },
         nextImage: function () {
 
         },
         exit: function () {
-            $('.ImageZoom-cover').addClass('rotateOut').removeClass('rotateIn').css('display','none')
-            $('.ImageZoom-image').addClass('zoomOut').css('display','block')
+            $('.ImageZoom-cover').addClass('rotateOut').removeClass('rotateIn')
+            setTimeout(function () {
+                $('.ImageZoom-cover').css('display','none')
+            }, 500)
+            $('.ImageZoom-image').addClass('zoomOut').removeClass('zoomIn').css('display','none')
         }
     }
 
