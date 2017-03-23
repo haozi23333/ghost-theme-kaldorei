@@ -17,7 +17,6 @@
                 })
             })(index)
         })
-
     }
 
     /**
@@ -52,6 +51,10 @@
             loadImage(src, function (imageElement) {
                 $('.ImageZoom-image').addClass('zoomIn').removeClass('zoomOut').css('display','block')
                 $('.ImageZoom-loading').addClass('zoomOut').removeClass('zoomIn').css('display','none')
+                $('.ImageZoom-image-box').css({
+                    left: 'calc(50% - ' + (src.naturalwidth / 2)+'px)',
+                    top: 'calc(50% - ' + (src.naturalheight / 2)+'px)'
+                })
                 $(imageElement).appendTo($('.ImageZoom-image-box'))
             })
         },
