@@ -35,20 +35,6 @@
             scrollToTop();
         });
 
-        // highlight config
-        // hljs.initHighlightingOnLoad();
-
-        // numbering for pre>code blocks
-        // $(function() {
-        //     $('pre code').each(function() {
-        //         var lines = $(this).text().split('\n').length - 1;
-        //         var $numbering = $('<ul/>').addClass('pre-numbering');
-        //         $(this).addClass('has-numbering').parent().append($numbering);
-        //         for (var i = 1; i <= lines; i++) {
-        //             $numbering.append($('<li/>').text(i));
-        //         }
-        //     });
-        // });
 
         var toc = $('.toc');
         // toc config
@@ -91,25 +77,6 @@
         // tooltip config
         $('[data-rel=tooltip]').tooltip();
 
-        // fancybox config
-        $('.post-content a:has(img)').addClass('fancybox');
-        $(".fancybox").attr('rel', 'gallery-group').fancybox({
-            helpers: {
-                overlay: {
-                    css: {
-                        'background': 'rgba(0, 154, 97, 0.33)'
-                    },
-                    locked: false
-                }
-            },
-            beforeShow: function() {
-                var alt = this.element.find('img').attr('alt');
-
-                this.inner.find('img').attr('alt', alt);
-
-                this.title = alt;
-            }
-        });
 
         // add archives year
         var yearArray = new Array();
@@ -163,6 +130,10 @@
     };
 
     aceInit()
+
+    $(".post-content img").ImageZoom({
+
+    })
 })(jQuery);
 
 function scrollToTop(name, speed) {
@@ -199,7 +170,7 @@ function aceInit() {
             $('code').map(function (index, el) {
                 var p = el.className.split('-')
                 $(el).attr({
-                    'ace-mode': 'ace/mode/' + (p[1] || "txt"),
+                    'ace-mode': 'ace/mode/' + (p[1] || "plain_text"),
                     'ace-theme': 'ace/theme/' + (p[2] || "chrome"),
                     'gutter': p[3] || true
                 })
@@ -219,3 +190,5 @@ function aceInit() {
     })
 
 }
+
+
