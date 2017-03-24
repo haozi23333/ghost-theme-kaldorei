@@ -31,6 +31,9 @@
             $('.widget-toc').css('width', $('.widget-tag-cloud').width())
         });
 
+        $(window).on('resize', function () {
+            $('.widget-toc').css('width', $('.widget-tag-cloud').width())
+        })
         // #backTop Button Event
         $("#backTop").on("click", function() {
             scrollToTop();
