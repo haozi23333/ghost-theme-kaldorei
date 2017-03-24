@@ -28,6 +28,7 @@
             document.documentElement.scrollTop + document.body.scrollTop > 250 ?
                 scrollerTOC.addClass("widget-toc-fixed") :
                 scrollerTOC.removeClass("widget-toc-fixed");
+            $('.widget-toc').css('width', $('.widget-tag-cloud').width())
         });
 
         // #backTop Button Event

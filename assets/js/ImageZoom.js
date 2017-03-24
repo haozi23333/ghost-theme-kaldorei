@@ -50,32 +50,29 @@
         image.src = src
         image.onload = function () {
             $(image).removeAttr('width')
+            var width = height = 0;
+            var boxWidth = $('.ImageZoom-image').width() - 50,
+                boxHeight = $('.ImageZoom-image').height() - 50
             if(image.naturalHeight > $('.ImageZoom-image').height()) {
-                var boxWidth = $('.ImageZoom-image').width() - 50,
-                    boxHeight = $('.ImageZoom-image').height() - 50,
-                    width = boxHeight * image.naturalWidth / image.naturalHeight,
-                    height = image.naturalHeight * width / image.naturalWidth
-                $('.ImageZoom-image-box').css({
-                    left: 'calc(50% - ' + (width / 2) +'px)',
-                    top: 'calc(50% - ' + (height / 2) +'px)',
-                    'max-height': boxHeight + 'px',
-                    'max-width': boxWidth + 'px',
-                    width: width + 'px',
-                    height: height + 'px'
-                })
+                 width = boxHeight * image.naturalWidth / image.naturalHeight
+                 height = image.naturalHeight * width / image.naturalWidth
                 $(image).css({
                     width: width + 'px',
                     height: height + 'px'
                 })
             }else {
                 $(image).css('margin',($('.ImageZoom-image').height() / 2) - (image.naturalHeght)/2  + 'px auto 0')
-                $('.ImageZoom-image-box').css({
-                    left: 'calc(50% - ' + (image.naturalWidth / 2) +'px)',
-                    top: 'calc(50% - ' + (image.naturalHeight / 2) +'px)',
-                    width: image.naturalWidth + 'px',
-                    height: image.naturalHeight + 'px'
-                })
+                width = image.naturalWidth
+                height = image.naturalHeight
             }
+            $('.ImageZoom-image-box').css({
+                left: 'calc(50% - ' + (width / 2) +'px)',
+                top: 'calc(50% - ' + (height / 2) +'px)',
+                'max-height': boxHeight + 'px',
+                'max-width': boxWidth + 'px',
+                width: width + 'px',
+                height: height + 'px'
+            })
             callback(image)
         }
     }

@@ -1415,7 +1415,7 @@ body.nav-opened .site-wrapper {
 }
 .sidebar {
     display: block;
-    padding-left: 20px !important;
+    /*padding-left: 20px !important;*/
     padding-right: 0px !important;
 }
 
@@ -1932,6 +1932,12 @@ body.nav-opened .site-wrapper {
     }
 }
 
+@media screen and (max-width: 995px){
+    .widget{
+        display: none;
+    }
+}
+
 /* ==========================================================================
    18. Media Queries - Smaller than 1024px for (tablet - landscape)
    ========================================================================== */
@@ -2436,7 +2442,7 @@ code.has-numbering {
 ::-webkit-scrollbar
 {
     width: 6px;
-    height: 16px;
+    height: 6px;
     background-color: #F5F5F5;
     -webkit-animation-duration:.4s;
     animation-duration:.4s;
