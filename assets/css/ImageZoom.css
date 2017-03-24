@@ -25,30 +25,36 @@
     left: 0;
     bottom: 0;
     right: 0;
+    /*width: 100vh;*/
+    height: 100vh;
     z-index: 99999;
     display: none;
 }
 
 .ImageZoom-image{
     background: transparent;
-    height: 200px;
-    width: 200px;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
+    height: 100%;
+    width: 100%;
+    top:0;
     position: fixed;
     z-index: 999999;
+    display: none;
 }
 .ImageZoom-image-box{
-    background: transparent;
-    /*top: calc(50% - 100px);*/
-    /*left: calc(50% - 100px);*/
+    display: inline-block;
+    vertical-align: middle;
     position: fixed;
+
+    /*overflow: hidden;*/
 }
 
 
 .ImageZoom-image-box img{
-    width: 100%;
-    height: 100%;
+    /* width: 100vh; */
+    position: absolute;
+    /* margin: 50vh auto 0; */
+    /* transform: translateY(-50%); */
+    box-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
 
 

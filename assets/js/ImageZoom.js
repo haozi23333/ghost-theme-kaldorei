@@ -50,15 +50,45 @@
         image.src = src
         image.onload = function () {
             $(image).removeAttr('width')
+            if(image.naturalHeight > $('.ImageZoom-image').height()) {
+                var boxWidth = $('.ImageZoom-image').width() - 50,
+                    boxHeight = $('.ImageZoom-image').height() - 50,
+                    width = boxHeight * image.naturalWidth / image.naturalHeight,
+                    height = image.naturalHeight * width / image.naturalWidth
+                $('.ImageZoom-image-box').css({
+                    left: 'calc(50% - ' + (width / 2) +'px)',
+                    top: 'calc(50% - ' + (height / 2) +'px)',
+                    'max-height': boxHeight + 'px',
+                    'max-width': boxWidth + 'px',
+                    width: width + 'px',
+                    height: height + 'px'
+                })
+                $(image).css({
+                    width: width + 'px',
+                    height: height + 'px'
+                })
+            }else {
+                $(image).css('margin',($('.ImageZoom-image').height() / 2) - (image.naturalHeght)/2  + 'px auto 0')
+                $('.ImageZoom-image-box').css({
+                    left: 'calc(50% - ' + (image.naturalWidth / 2) +'px)',
+                    top: 'calc(50% - ' + (image.naturalHeight / 2) +'px)',
+                    width: image.naturalWidth + 'px',
+                    height: image.naturalHeight + 'px'
+                })
+            }
             callback(image)
         }
     }
     var modelWindow = {
         init :function () {
+            //最外一层的遮罩
             $('body').append('<div class="ImageZoom-cover ImageZoom-blur"></div>')
+            //loading 界面
             $('body').append('<div class="ImageZoom-loading"><div id="cssload-pgloading"><div class="cssload-loadingwrap"><ul class="cssload-bokeh"> <li></li><li></li> <li></li><li></li></ul></div></div></div>')
+            //图片显示界面
             $('body').append('<div class="ImageZoom-image"><div class="ImageZoom-image-box"></div></div>')
-            $('.ImageZoom-cover').on('click', function () {
+            //当图片层被点击的时候退出图片放大
+            $('.ImageZoom-image').on('click', function () {
                 modelWindow.exit()
             })
         },
@@ -66,8 +96,9 @@
             /**
              * 加载模态窗体
              */
-            $('.ImageZoom-loading').animateCSS('zoomIn')
+            $('.ImageZoom-loading').animateCSS('rotateInDownLeft')
             $('.ImageZoom-cover').animateCSS('zoomIn')
+            $('body').css('overflow', 'hidden')
             $('.ImageZoom-image-box img').remove()
             loadImage(src, function (imageElement) {
                 $('.ImageZoom-image').animateCSS('zoomIn')
@@ -76,6 +107,7 @@
                     left: 'calc(50% - ' + (src.naturalwidth / 2)+'px)',
                     top: 'calc(50% - ' + (src.naturalheight / 2)+'px)'
                 })
+
                 $(imageElement).appendTo($('.ImageZoom-image-box'))
             })
         },
@@ -88,6 +120,7 @@
 
         },
         exit: function () {
+            $('body').css('overflow', 'auto')
             $('.ImageZoom-cover').animateCSS('rotateOut')
             $('.ImageZoom-image').animateCSS('zoomOut')
         }
