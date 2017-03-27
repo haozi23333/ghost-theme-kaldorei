@@ -9,8 +9,8 @@
     var $document = $(document);
 
     $document.ready(function() {
-        var $postContent = $(".post-content");
-        $postContent.fitVids();
+        // var $postContent = $(".post-content");
+        // $postContent.fitVids();
 
         $(".scroll-down").arctic_scroll();
 
