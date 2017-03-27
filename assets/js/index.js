@@ -161,14 +161,15 @@ function scrollToTop(name, speed) {
 
 
 function aceInit() {
+    var baseUrl = document.URL.match(/http(s*):\/\/(.*?)\//)[0]
     if(document.getElementsByTagName('pre').length == 0){
         console.log('Ace.js 未加载 -> 没有找到代码段')
         return
     }
-    $.getScript('../assets/ace-min-1.2.6/ace.js').done(function () {
-        $.getScript('../assets/ace-min-1.2.6/ext-static_highlight.js').done(function () {
+    $.getScript(baseUrl + 'assets/ace-min-1.2.6/ace.js').done(function () {
+        $.getScript(baseUrl + 'assets/ace-min-1.2.6/ext-static_highlight.js').done(function () {
             console.log('Ace.js 加载完成')
-            ace.config.set('basePath', '../assets/ace-min-1.2.6/');
+            ace.config.set('basePath', baseUrl + 'assets/ace-min-1.2.6/');
             var highlight = ace.require("ace/ext/static_highlight")
             var dom = ace.require("ace/lib/dom")
             $('pre code').map(function (index, el) {

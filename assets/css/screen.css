@@ -2095,7 +2095,7 @@ body.nav-opened .site-wrapper {
     }
     .post-content img {
         padding: 0;
-        width: calc(100% + 32px);
+        /*width: calc(100% + 32px);*/
         /* expand with to image + margins */
         min-width: 0;
         max-width: 90%;
