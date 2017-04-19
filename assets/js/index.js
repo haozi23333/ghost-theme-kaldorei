@@ -135,9 +135,7 @@
 
     aceInit()
 
-    $(".post-content").ImageZoom({
-
-    })
+    $(".post-content").ImageZoom({})
 })(jQuery);
 
 function scrollToTop(name, speed) {
@@ -173,7 +171,7 @@ function aceInit() {
             var highlight = ace.require("ace/ext/static_highlight")
             var dom = ace.require("ace/lib/dom")
             $('pre code').map(function (index, el) {
-                var p = el.className.split('-')
+                var p = el.className.split('-').map(v => v.replace(/ /g,''))
                 $(el).attr({
                     'ace-mode': 'ace/mode/' + (p[1] || "plain_text"),
                     'ace-theme': 'ace/theme/' + (p[2] || "chrome"),
