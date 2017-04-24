@@ -46,6 +46,7 @@
      * @param callback  加载完成回调
      */
     function loadImage(src, callback) {
+        src = src.replace(/\?.*/,'')
         var image = new Image(src)
         image.src = src
         image.onload = function () {
