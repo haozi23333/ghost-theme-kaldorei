@@ -34,7 +34,6 @@
                      */
                     event.stopPropagation()
                     modelWindow.show($(this).attr('src') || 'https://haozi.moe/content/images/2016/11/ph.png')
-
                 })
             })(index)
         })
@@ -46,8 +45,7 @@
      * @param callback  加载完成回调
      */
     function loadImage(src, callback) {
-        src = src.replace(/\?.*/,'')
-        var image = new Image(src)
+        var image = new Image
         image.src = src
         image.onload = function () {
             $(image).removeAttr('width')
@@ -86,9 +84,11 @@
             //图片显示界面
             $('body').append('<div class="ImageZoom-image"><div class="ImageZoom-image-box"></div></div>')
             //当图片层被点击的时候退出图片放大
-            $('.ImageZoom-image').on('click', function () {
-                modelWindow.exit()
+            $('.ImageZoom-image').on('click', function (event) {
+                if(event.target.nodeName != "A")
+                    modelWindow.exit()
             })
+
         },
         show: function (src) {
             /**
@@ -98,7 +98,7 @@
             $('.ImageZoom-cover').animateCSS('zoomIn')
             $('body').css('overflow', 'hidden')
             $('.ImageZoom-image-box img').remove()
-            loadImage(src, function (imageElement) {
+            loadImage(src.replace(/\?.*/, "") + "?imageView2/0/q/75|imageslim", function (imageElement) {
                 $('.ImageZoom-image').animateCSS('zoomIn')
                 $('.ImageZoom-loading').animateCSS('zoomOut')
                 $('.ImageZoom-image-box').css({
@@ -107,6 +107,7 @@
                 })
 
                 $(imageElement).appendTo($('.ImageZoom-image-box'))
+                $('.ImageZoom-image').append('<a class="openSourceImage" target="_Blank" href="' + src.replace(/\?.*/, "") + '">查看原图</a>')
             })
         },
 
