@@ -656,7 +656,7 @@ body.nav-opened .site-wrapper {
 
 .post {
     position: relative;
-    max-width: 750px;
+    /*max-width: 1250px;*/
     margin: 20px;
     padding-bottom: 2rem;
     border-bottom: #EBF2F6 1px solid;
@@ -1401,7 +1401,7 @@ body.nav-opened .site-wrapper {
     min-width: 320px;
     padding: 0px !important;
     margin: 0px auto 10px;
-    max-width: 1080px;
+    max-width: 1280px;
     text-align: left;
     position: relative;
     margin-left: auto;
@@ -2266,7 +2266,7 @@ body.nav-opened .site-wrapper {
 }
 @media (min-width:1200px) {
     .container {
-        width: 1080px !important
+        width: 1300px !important
     }
 }
 
