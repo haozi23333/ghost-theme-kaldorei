@@ -1,0 +1,7 @@
+.markdown-body .highlight pre, .markdown-body pre {
+    padding: 0px;
+}
+
+.markdown-body img {
+    position: inherit;
+}

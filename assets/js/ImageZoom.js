@@ -7,23 +7,27 @@
      * @param className 需要添加的 class
      * @returns {$}
      */
-    $.fn.animateCSS = function (className) {
+    $.fn.animateCSS = function (className, delay) {
+        // 首先判断这个元素是否已经拥有了`animated`的 class,没有的话就给他添加上
         if(!$(this).hasClass('animated'))
             $(this).addClass('animated')
+        // 如果是In的动画那么先删掉全部的Out，然后将这个元素的display置为block
         if(/In/.test(className)){
             $(this).removeClass(className.match(/(.*)In/)[1] + 'Out' + ' ' + className).addClass(className)
             $(this).css('display', 'block')
         }else {
+            // 如果不是In的动画那么先删掉全部的In，然后将这个元素的display在400ms之后置为none
             $(this).removeClass(className.match(/(.*)Out/)[1] + 'Out' + ' ' + className).addClass(className)
             var that = this
+            // 动画延迟
             setTimeout(function () {
                 $(that).css('display', 'none')
-            }, 400)
+            }, delay || 400)
         }
         return this
     }
 
-    var ImageZoom = function (setting) {
+    var ImageZoom = function () {
         modelWindow.init()
         var imgList = this.find('img')
         imgList.map(function (index, el){
